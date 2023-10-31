@@ -2,7 +2,7 @@
 
 const ThirdSection = () => {
 	return (
-		<section className="h-screen border" >
+		<section className="h-screen" >
 			<h1  >skils</h1>
 		</section>
 	);

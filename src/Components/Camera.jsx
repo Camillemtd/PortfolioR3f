@@ -13,12 +13,12 @@ const Camera = ({ currentSection, target }) => {
 
   useFrame(() => {
     if (cameraRef.current && target.current) {
-      const startPos = new THREE.Vector3(0, 0, 9);
+      const startPos = new THREE.Vector3(1, 1, 9);
       const endPos = new THREE.Vector3(-4, -5, 7);
       
       const currentPos = startPos.clone().lerp(endPos, currentSection);
 
-      const startLook = new THREE.Vector3(0, 6, 0);
+      const startLook = new THREE.Vector3(0, 7, 0);
       const endLook = new THREE.Vector3(0, 1, 0);
       
       const currentLook = startLook.clone().lerp(endLook, currentSection);
@@ -29,7 +29,7 @@ const Camera = ({ currentSection, target }) => {
 });
 
 
-  return <PerspectiveCamera ref={cameraRef} position={[0, 10, 9]} makeDefault />;
+  return <PerspectiveCamera ref={cameraRef} position={[0, 0, 9]} makeDefault />;
 };
 
 export default Camera;

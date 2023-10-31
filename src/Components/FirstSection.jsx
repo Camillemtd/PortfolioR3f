@@ -1,7 +1,7 @@
 const FirstSection = () => {
   return (
     <section className="h-screen text-cyan-200 w-1/2 flex justify-center items-center ">
-      <div className=" m-10 p-10 bg-cyan-200 bg-opacity-10 rounded-lg ">
+      <div className=" m-10 p-10 bg-cyan-200 bg-opacity-10 rounded-lg hidden ">
         <h1 className="text-6xl">Metard Camille</h1>
         <p className="text-justify">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
