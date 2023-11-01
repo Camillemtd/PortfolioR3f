@@ -11,6 +11,7 @@ import CarouselProjetc from "./Components/CarouselProjetc";
 
 import threejsProject from "./data/Projects";
 import image from "./data/image";
+import Header from "./Components/Header";
 
 function App() {
   const [currentSection, setCurrentSection] = useState(0);
@@ -45,6 +46,7 @@ function App() {
 
   return (
     <>
+      
       <div className="fixed top-0 left-0 w-full h-full z-0 flex">
         <Canvas>
           <Camera currentSection={currentSection} target={modelRef} />
@@ -64,6 +66,7 @@ function App() {
           />
         </Canvas>
       </div>
+      <Header/>
       <div className="flex flex-col h-full w-full">
         <FirstSection />
         <SecondSection />

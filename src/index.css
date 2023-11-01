@@ -2,17 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-
 *,
 #root,
-body
-{
-    margin: 0;
-    padding: 0;
+body {
+  margin: 0;
+  padding: 0;
 }
-html
-{    
-    background: #05031f;
-    height: 100%;
+html {
+  height: 100%;
+}
+#root {
+  background: radial-gradient(circle,rgb(115, 30, 130), #0f0e3e);
+}
 
+.label > div{
+    white-space: nowrap;
+    color: white;
+    max-width: 40px;
 }

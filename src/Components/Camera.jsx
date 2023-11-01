@@ -18,7 +18,7 @@ const Camera = ({ currentSection, target }) => {
       
       const currentPos = startPos.clone().lerp(endPos, currentSection);
 
-      const startLook = new THREE.Vector3(0, 7, 0);
+      const startLook = new THREE.Vector3(-1, 7, 0);
       const endLook = new THREE.Vector3(0, 1, 0);
       
       const currentLook = startLook.clone().lerp(endLook, currentSection);

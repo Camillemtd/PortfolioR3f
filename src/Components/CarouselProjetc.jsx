@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
-import { useTexture } from "@react-three/drei";
+import { Html, useTexture } from "@react-three/drei";
 
 function lerpVector(v1, v2, alpha) {
   const result = v1.clone();
@@ -102,8 +102,12 @@ const CarouselProjetc = ({ images, currentSection, data }) => {
       }
     }
   });
-
+   
   // LISTENERS
+  useEffect(() => {
+	setSelectedPlane(null)
+   }, [activeSegment])
+
   useEffect(() => {
     document.addEventListener("pointermove", handlePointerMove);
     document.addEventListener("pointerup", handlePointerUp);
@@ -120,14 +124,14 @@ const CarouselProjetc = ({ images, currentSection, data }) => {
       const theta = index * angleStep;
       const x = radius * Math.cos(theta) * 1.1;
       const z = radius * Math.sin(theta) * 1.1;
+	  const computedOpacity = selectedPlane === index ? 1 : 0.8;
       const materialWithTexture = new THREE.MeshBasicMaterial({
         map: textures[index % textures.length],
         side: THREE.DoubleSide,
         transparent: true,
-        opacity: 0.8,
+        opacity: computedOpacity,
         depthWrite: false,
       });
-
       return (
         <mesh
           position={[x, 0, z]}
@@ -137,7 +141,13 @@ const CarouselProjetc = ({ images, currentSection, data }) => {
           material={materialWithTexture}
           scale={[1, 1, 1]}
           onPointerDown={(event) => handlePointerDown(event, index)}
-        />
+        >
+			{selectedPlane === index && (
+    <Html position={[-2.2, 1.4, 0]} wrapperClass="label">
+      {data[index % data.length].title} <br/>
+    </Html>
+  )}
+		</mesh>
       );
     });
 
