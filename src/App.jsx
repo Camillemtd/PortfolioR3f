@@ -11,7 +11,6 @@ import CarouselProjetc from "./Components/CarouselProjetc";
 
 import threejsProject from "./data/Projects";
 import image from "./data/image";
-console.log(image);
 
 function App() {
   const [currentSection, setCurrentSection] = useState(0);
