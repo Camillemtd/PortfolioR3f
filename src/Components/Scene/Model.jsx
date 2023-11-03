@@ -1,4 +1,4 @@
-import { useMatcapTexture, useGLTF } from "@react-three/drei";
+import { useMatcapTexture, useGLTF, Box } from "@react-three/drei";
 import { forwardRef } from "react";
 
 const Model = forwardRef((props, ref) => {
@@ -7,7 +7,7 @@ const Model = forwardRef((props, ref) => {
   {
     /* Texture*/
   }
-  const [matcapTexture] = useMatcapTexture("C7C7D7_4C4E5A_818393_6C6C74", 256);
+  const [matcapTexture] = useMatcapTexture("070B0C_B2C7CE_728FA3_5B748B", 256);
 
   return (
     <>
@@ -21,9 +21,11 @@ const Model = forwardRef((props, ref) => {
         material={nodes.men.material}
       >
         <meshMatcapMaterial
-          map={nodes.men.material.map}
+          // map={nodes.men.material.map}
           matcap={matcapTexture}
           color={"#f9f7f3"}
+          transparent= {true}
+          opacity={0.8}
         />
       </mesh>
     </>

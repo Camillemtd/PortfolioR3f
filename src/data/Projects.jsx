@@ -6,6 +6,7 @@ const threejsProject = [
 		video: '/projects/generatorgalaxy.mov',
 		image: '/projects/galaxyImage.png',
         date: "october 2023",
+		techno: "threejs",
         lienGit: 'https://github.com/Camillemtd/Galaxy-Generator-Threejs',
         lien:'https://galaxy-generator-threejs-beige.vercel.app/'
 	},
@@ -15,6 +16,7 @@ const threejsProject = [
 		video: '/projects/hauntedHouse.mov',
 		image: '/projects/hauntedHouseImage.png',
         date: "october 2023",
+		techno: "threejs",
         lienGit: 'https://github.com/Camillemtd/Haunted-HouseThreejs',
         lien:'https://hauntedhousethreejs.vercel.app/'
 	},
@@ -24,6 +26,7 @@ const threejsProject = [
 		video: '/projects/portal.mov',
 		image: '/projects/portalImage.png',
         date: "october 2023",
+		techno: "R3F/Drei",
         lienGit: 'https://github.com/Camillemtd/PortalSceneR3F',
         lien:'https://portalscener3f.vercel.app/'
 	},
@@ -32,6 +35,7 @@ const threejsProject = [
         description:"frontend of the arewefastyet project, which is a benchmarking site for the various versions of the Vitess project.",
 		image: '/projects/arewefastyet.png',
         date: "june-august 2023",
+		techno: "React",
         lienGit: 'https://github.com/Camillemtd/arewefastyet',
         lien:'https://benchmark.vitess.io/'
 	},

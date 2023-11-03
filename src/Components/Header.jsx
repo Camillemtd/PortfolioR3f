@@ -1,13 +1,13 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({setCurrentSection}) => {
   return (
-    <div className="flex justify-center bg-opacity-10 bg-cyan-200 fixed w-full z-5000">
+    <div className="flex justify-center bg-opacity-10 bg-cyan-200 fixed w-full z-50">
       <div className=" text-white flex pl-10 pr-10 justify-end gap-10 p-5 w-full max-w-8xl cursor-pointer">
-        <a href="#section1">About</a>
-        <a href="#project">Projects</a>
-        <a>Skills</a>
-        <a>Contact</a>
+        <a onClick={() => setCurrentSection(1)}>About</a>
+        <a onClick={() => setCurrentSection(2)}>Projects</a>
+        <a onClick={() => setCurrentSection(3)}>Skills</a>
+        <a onClick={() => setCurrentSection(3)} href="#contact">Contact</a>
         <div className="border-r border-slate-400 h-5 " />
         <a href="https://github.com/Camillemtd">
           <svg
