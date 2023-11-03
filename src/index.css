@@ -12,7 +12,7 @@ body {
 html {
   height: 100%;
 }
-#root, body {
+ html {
   background: linear-gradient(rgb(0, 0, 0), #8f0aee);
 }
 
@@ -72,4 +72,36 @@ html {
 }
 .slide-in-bottom {
 	        animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes scroll_2 {
+  0%   { transform: translateY(0); opacity: 1; }
+  25%  { opacity: 1; }
+  75%  { transform: translateY(.20em); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+
+.scroll-icon__dot {
+  display: block;
+  position: absolute;
+  left: 50%;
+  background: #fff;
+  height: .2em;
+  width: .1em;
+  top: .15em;
+  margin-left: -.05em;
+  border-radius: 50%;
+  transform-origin: top center;
+  backface-visibility: hidden;
+  animation: scroll_2 2s ease-out infinite;
+}
+
+.scroll-icon {
+  display: block;
+  position: relative;
+  height: 1em;
+  width: 0.70em;
+  border: .05em solid #fff;
+  border-radius: 1em;
 }
