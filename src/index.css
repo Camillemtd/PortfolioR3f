@@ -21,6 +21,7 @@ html {
     
 }
 
+
 .label { /* Ajustez cette valeur en fonction de la taille de votre plane */
     word-wrap: break-word;
     text-align: start;
@@ -109,6 +110,19 @@ html {
 	        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
+@keyframes slide-in-right {
+  0% {
+            transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+.slide-in-right {
+	        animation: slide-in-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
 
 
 .scroll-icon__dot {
@@ -133,4 +147,12 @@ html {
   width: 0.70em;
   border: .05em solid #fff;
   border-radius: 1em;
+}
+
+.scrollable-div::-webkit-scrollbar {
+  display: none;
+}
+
+.overflow-hidden-important {
+  overflow: hidden !important;
 }

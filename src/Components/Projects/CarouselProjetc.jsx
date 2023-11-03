@@ -64,7 +64,7 @@ const CarouselProjetc = ({ currentSection, data }) => {
           ? new THREE.Vector3(0.35, 0.35, 0.35)
           : new THREE.Vector3(0, 0, 0);
       groupRef.current.scale.copy(
-        lerpVector(groupRef.current.scale, targetForEntireCarousel, 0.01)
+        lerpVector(groupRef.current.scale, targetForEntireCarousel, 0.04)
       );
 
       // Rotation logic for the carousel
@@ -146,10 +146,18 @@ const CarouselProjetc = ({ currentSection, data }) => {
             material={materialWithTexture}
             scale={[1, 1, 1]}
             onPointerDown={(event) => handlePointerDown(event, index)}
+            onPointerOver={(e) => {
+              e.stopPropagation();
+              document.body.style.cursor = 'pointer';
+            }}
+            onPointerOut={(e) => {
+              e.stopPropagation();
+              document.body.style.cursor = 'auto';
+            }}
           ></mesh>
           {selectedPlane === index && (
             <Html fullscreen>
-              <div className="flex w-1/2  text-white w-100 justify-between pt-32 pl-2 text-focus-in ">
+              <div className="flex w-1/2  text-white w-100 justify-between pt-32 pl-2 slide-in-right ">
                 <div className="w-1/2 flex flex-col">
                   <h1 className="text-3xl font-bold text-lime-300">
                     {data[index % data.length].title}

@@ -17,6 +17,8 @@ import Intro from "./Components/About/Intro";
 function App() {
   const [currentSection, setCurrentSection] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [lockScroll, setLockScroll] = useState(false);
 
   const cameraPositions = [
     [0, 10, 9],
@@ -47,6 +49,16 @@ function App() {
   // Gérer le défilement
   useEffect(() => {
     const handleScroll = (e) => {
+      if (isAnimating || lockScroll) {
+        e.preventDefault();
+        return;
+      }
+      if (currentSection === 3) {
+        if ( window.scrollY > 0) {
+          
+          return;
+        }
+      }
       if (e.deltaY > 0) {
         if (currentSection < cameraPositions.length - 1) {
           let nextSection = currentSection + 1;
@@ -58,11 +70,13 @@ function App() {
           setCurrentSection(prevSection);
         }
       }
+      setLockScroll(true);
+      setTimeout(() => setLockScroll(false), 1500);
     };
 
     window.addEventListener("wheel", handleScroll);
     return () => window.removeEventListener("wheel", handleScroll);
-  }, [currentSection]);
+  }, [currentSection, isAnimating, lockScroll]);
   const parallaxIntensity = 0.8; 
 
 
@@ -80,6 +94,8 @@ function App() {
               cameraPositions[currentSection][2],
             ]}
             currentSection={currentSection}
+            isAnimating={isAnimating}
+          setIsAnimating={setIsAnimating}
           />
           <ambientLight />
           <Environment />
@@ -95,7 +111,7 @@ function App() {
 
       <Header setCurrentSection={setCurrentSection} />
 
-      <div className="flex flex-col w-full relative z-40">
+      <div className="flex flex-col w-full relative z-40 ">
         {currentSection === 0 && <Intro />}
         {currentSection === 1 && <FirstSection />}
         {currentSection === 2 && <SecondSection />}

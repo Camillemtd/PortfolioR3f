@@ -3,10 +3,10 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { PerspectiveCamera } from "@react-three/drei";
 
-const Camera = ({ target, position, currentSection }) => {
+const Camera = ({ position, currentSection, isAnimating, setIsAnimating  }) => {
   const cameraRef = useRef(null);
   const targetPosition = useMemo(() => new THREE.Vector3(...position), [position]);
-  const lerpSpeed = 0.02;
+  const lerpSpeed = 0.04;
 
   const lookAtPoints = [
       new THREE.Vector3(0, 9, 0),
@@ -19,12 +19,27 @@ const Camera = ({ target, position, currentSection }) => {
   const currentLookAt = useRef(lookAtPoints[0]);
 
   useFrame(() => {
+    if (!isAnimating) {
+        setIsAnimating(true);
+        // Réinitialisez le verrou après la durée de l'animation
+        setTimeout(() => setIsAnimating(false), 3000); // Encore une fois, 300ms est juste un exemple
+      }
       if (cameraRef.current) {
+        const distance = cameraRef.current.position.distanceTo(targetPosition);
+
+        // Commencez l'animation et désactivez le scroll
+        if (distance > 0.1 && !isAnimating) {
+          setIsAnimating(true);
+        }
           cameraRef.current.position.lerp(targetPosition, lerpSpeed);
           
           // Lerp le lookAt
           currentLookAt.current.lerp(lookAtPoints[currentSection], lerpSpeed);
           cameraRef.current.lookAt(currentLookAt.current);
+
+          if (distance <= 0.1 && isAnimating) {
+            setIsAnimating(false);
+          }
       }
   });
 
