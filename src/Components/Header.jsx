@@ -6,7 +6,7 @@ const Header = ({setCurrentSection}) => {
       <div className=" text-white flex pl-10 pr-10 justify-end gap-10 p-5 w-full max-w-8xl cursor-pointer">
         <a onClick={() => setCurrentSection(1)} className="text-2xl font-semibold">About</a>
         <a onClick={() => setCurrentSection(2)} className="text-2xl font-semibold">Projects</a>
-        <a onClick={() => setCurrentSection(3)} className="text-2xl font-semibold">Skills</a>
+        <a onClick={() => setCurrentSection(3)} className="text-2xl font-semibold" href="#skill">Skills</a>
         <a onClick={() => setCurrentSection(3)} href="#contact" className="text-2xl font-semibold">Contact</a>
         <div className="border-r border-2 border-slate-400 h-5 pt-7" />
         <a href="https://github.com/Camillemtd">

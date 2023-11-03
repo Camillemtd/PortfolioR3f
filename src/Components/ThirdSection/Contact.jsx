@@ -43,12 +43,12 @@ const Contact = () => {
   return <div id="contact" className="text-white flex justify-center">
 	<form className="flex flex-col w-1/2">
                     <label htmlFor='name'>Name</label>
-                    <input className="bg-gray-500 text-gray-200 border rounded p-2 mb-4 focus:border-blue-500 focus:outline-none" id='name' placeholder='Greg' required type="text"></input>
+                    <input className="bg-black text-gray-200 border border-orange-200 rounded p-2 mb-4 focus:border-orange-200 focus:outline-none" id='name' placeholder='Greg' required type="text"></input>
                     <label htmlFor='email'>Email</label>
-                    <input className="bg-gray-500 text-gray-200 border rounded p-2 mb-4 focus:border-blue-500 focus:outline-none" id='email' placeholder='gregou@hotmail.com' required type='email'></input>
+                    <input className="bg-black text-gray-200 border border-orange-200 rounded p-2 mb-4 focus:border-orange-200 focus:outline-none" id='email' placeholder='gregou@hotmail.com' required type='email'></input>
                     <label htmlFor='message'>Message</label>
-                    <textarea className="bg-gray-500 text-gray-200 border rounded p-2 mb-4 focus:border-blue-500 focus:outline-none" id='message' placeholder='I like your work' required rows='6'></textarea>
-                    <button className="bg-indigo-500 text-white rounded p-2 cursor-pointer hover:bg-blue-400 transition-colors" id='sendBtn' onClick={sendMessage}>Send</button>
+                    <textarea className="bg-black text-gray-200 border border-orange-200 rounded p-2 mb-4 focus:border-orange-200 focus:outline-none" id='message' placeholder='I like your work' required rows='6'></textarea>
+                    <button className="ring-2 ring-offset-orange-200 ring-offset-2 ring-black bg-black text-white rounded p-2 cursor-pointer hover:bg-indigo-400 transition-colors" id='sendBtn' onClick={sendMessage}>Send</button>
                 </form>
   </div>;
 };

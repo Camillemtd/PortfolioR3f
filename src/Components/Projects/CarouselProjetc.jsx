@@ -2,13 +2,14 @@ import * as THREE from "three";
 import { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Html, useTexture } from "@react-three/drei";
+import React from "react";
 
 function lerpVector(v1, v2, alpha) {
   const result = v1.clone();
   return result.lerp(v2, alpha);
 }
 
-const CarouselProjetc = ({ images, currentSection, data }) => {
+const CarouselProjetc = ({ currentSection, data }) => {
   // CONSTANTS
   const segments = 6;
   const radius = 5;
@@ -89,7 +90,7 @@ const CarouselProjetc = ({ images, currentSection, data }) => {
 
       // Scale planes progressively using lerpVector
       const planes = groupRef.current.children;
-      const targetForSelected = new THREE.Vector3(1, 1, 1);
+      const targetForSelected = new THREE.Vector3(1.5, 1.5, 1.5);
       const normalScale = new THREE.Vector3(1, 1, 1);
       for (let i = 0; i < planes.length; i++) {
         if (i === selectedPlane) {
@@ -117,6 +118,10 @@ const CarouselProjetc = ({ images, currentSection, data }) => {
     };
   }, []);
 
+  useEffect(() => {
+    setSelectedPlane(null)
+  }, [currentSection])
+
   // PLANES
   const planes = Array(segments)
     .fill()
@@ -133,33 +138,28 @@ const CarouselProjetc = ({ images, currentSection, data }) => {
         depthWrite: false,
       });
       return (
-        <mesh
-          position={[x, 0, z]}
-          rotation={[0, Math.PI / 2 - theta, 0]}
-          key={index}
-          geometry={imageGeometry}
-          material={materialWithTexture}
-          scale={[1, 1, 1]}
-          onPointerDown={(event) => handlePointerDown(event, index)}
-        >
-          {/* {selectedPlane === index && (
+        <React.Fragment key={index}>
+          <mesh
+            position={[x, 0, z]}
+            rotation={[0, Math.PI / 2 - theta, 0]}
+            geometry={imageGeometry}
+            material={materialWithTexture}
+            scale={[1, 1, 1]}
+            onPointerDown={(event) => handlePointerDown(event, index)}
+          ></mesh>
+          {selectedPlane === index && (
             <Html fullscreen>
-              <div className="flex w-1/2 absolute top-1/4 left-1/4 text-white w-100 justify-between p-20 border bg-black">
+              <div className="flex w-1/2  text-white w-100 justify-between pt-32 pl-2 text-focus-in ">
                 <div className="w-1/2 flex flex-col">
-                  <h1 className="text-3xl font-bold">
+                  <h1 className="text-3xl font-bold text-lime-300">
                     {data[index % data.length].title}
-                  </h1>{" "}
+                  </h1>
                   <br />
                   <p>{data[index % data.length].date}</p>
                   <p>{data[index % data.length].techno}</p> <br />
                   <p>{data[index % data.length].description}</p>
-                  <button onClick={() => setSelectedPlane(null)} className="border  px-10 py-5 rounded-xl justify-items-center items-center w-1/2 mt-10">
-                    Back
-                  </button>
-                </div>
-                <div className="w-1/2">
                   <div className="w-100 flex justify-center mb-2 p-10 gap-10">
-                    <a>
+                    <a href={data[index % data.length].lienGit}>
                       <svg
                         className="w-10 fill-white cursor-pointer"
                         role="img"
@@ -170,7 +170,7 @@ const CarouselProjetc = ({ images, currentSection, data }) => {
                         <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
                       </svg>
                     </a>
-                    <a>
+                    <a href={data[index % data.length].link}>
                       <svg
                         className="w-10 fill-white cursor-pointer"
                         role="img"
@@ -182,12 +182,11 @@ const CarouselProjetc = ({ images, currentSection, data }) => {
                       </svg>
                     </a>
                   </div>
-                  <img src={data[index % data.length].image} />
                 </div>
               </div>
             </Html>
-          )} */}
-        </mesh>
+          )}
+        </React.Fragment>
       );
     });
 

@@ -8,7 +8,7 @@ const threejsProject = [
         date: "october 2023",
 		techno: "threejs",
         lienGit: 'https://github.com/Camillemtd/Galaxy-Generator-Threejs',
-        lien:'https://galaxy-generator-threejs-beige.vercel.app/'
+        link:'https://galaxy-generator-threejs-beige.vercel.app/'
 	},
 	{
 		title:'Haunted House',
@@ -18,7 +18,7 @@ const threejsProject = [
         date: "october 2023",
 		techno: "threejs",
         lienGit: 'https://github.com/Camillemtd/Haunted-HouseThreejs',
-        lien:'https://hauntedhousethreejs.vercel.app/'
+        link:'https://hauntedhousethreejs.vercel.app/'
 	},
 	{
 		title:'Portal Scene R3F',
@@ -28,7 +28,7 @@ const threejsProject = [
         date: "october 2023",
 		techno: "R3F/Drei",
         lienGit: 'https://github.com/Camillemtd/PortalSceneR3F',
-        lien:'https://portalscener3f.vercel.app/'
+        link:'https://portalscener3f.vercel.app/'
 	},
 	{
 		title:'arewefastwet',
@@ -37,7 +37,7 @@ const threejsProject = [
         date: "june-august 2023",
 		techno: "React",
         lienGit: 'https://github.com/Camillemtd/arewefastyet',
-        lien:'https://benchmark.vitess.io/'
+        link:'https://benchmark.vitess.io/'
 	},
 ]
 

@@ -23,19 +23,16 @@ function App() {
     [0, 0, 9],
     [-4, -3, 9],
     [-10, -30, 40],
-    // Vous pouvez ajouter d'autres positions si nécessaire
   ];
 
   const modelRef = useRef(null);
 
   const handleMouseMove = (event) => {
-    // Calculer la position de la souris dans une plage de -1 à 1
     const x = (event.clientX / window.innerWidth) * 2 - 1;
     const y = -(event.clientY / window.innerHeight) * 2 + 1;
     setMousePosition({ x, y });
   };
 
-  // Initialisation: Scroller tout en haut
   useEffect(() => {
     setTimeout(() => {
       window.scrollTo(0, 0);
@@ -51,13 +48,11 @@ function App() {
   useEffect(() => {
     const handleScroll = (e) => {
       if (e.deltaY > 0) {
-        // Scroll vers le bas
         if (currentSection < cameraPositions.length - 1) {
           let nextSection = currentSection + 1;
           setCurrentSection(nextSection);
         }
       } else if (e.deltaY < 0) {
-        // Scroll vers le haut
         let prevSection = currentSection - 1;
         if (prevSection >= 0) {
           setCurrentSection(prevSection);
@@ -68,7 +63,7 @@ function App() {
     window.addEventListener("wheel", handleScroll);
     return () => window.removeEventListener("wheel", handleScroll);
   }, [currentSection]);
-  const parallaxIntensity = 0.8; // Ajustez ce nombre pour l'intensité
+  const parallaxIntensity = 0.8; 
 
 
   return (
