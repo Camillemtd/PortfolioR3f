@@ -11,7 +11,7 @@ const Camera = ({ target, position, currentSection }) => {
   const lookAtPoints = [
       new THREE.Vector3(0, 9, 0),
       new THREE.Vector3(-1, 1, 0),
-      new THREE.Vector3(-1, -6, 0),
+      new THREE.Vector3(-2.3, -4, 2.8),
       new THREE.Vector3(-1, -5, 0),
       // ... ajoutez d'autres points "look at" si nécessaire
   ];

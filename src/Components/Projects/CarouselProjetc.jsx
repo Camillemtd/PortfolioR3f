@@ -63,7 +63,7 @@ const CarouselProjetc = ({ images, currentSection, data }) => {
           ? new THREE.Vector3(0.35, 0.35, 0.35)
           : new THREE.Vector3(0, 0, 0);
       groupRef.current.scale.copy(
-        lerpVector(groupRef.current.scale, targetForEntireCarousel, 0.03)
+        lerpVector(groupRef.current.scale, targetForEntireCarousel, 0.01)
       );
 
       // Rotation logic for the carousel
@@ -194,7 +194,7 @@ const CarouselProjetc = ({ images, currentSection, data }) => {
   // RENDER
   return (
     <group
-      position={[-2.2, -5.6, 2]}
+      position={[-2.3, -5, 2.8]}
       rotation-y={Math.PI * 0.5}
       ref={groupRef}
       onPointerMove={handlePointerMove}
