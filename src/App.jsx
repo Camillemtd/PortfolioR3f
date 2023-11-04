@@ -1,6 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Sparkles, OrbitControls, SpotLight } from "@react-three/drei";
+import { Loader, useProgress } from "@react-three/drei";
+import useSound from "use-sound";
+import soundSection1 from "/sounds/section1.mp3"; // Chemin vers vos fichiers audio
+import soundSection2 from "/sounds/section2.mp3";
+import soundSection3 from "/sounds/section3.mp3";
 
 import Model from "./Components/Scene/Model";
 import FirstSection from "./Components/About/FirstSection";
@@ -19,6 +23,12 @@ function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isAnimating, setIsAnimating] = useState(false);
   const [lockScroll, setLockScroll] = useState(false);
+
+  const [playSoundSection1] = useSound(soundSection1, { loop: false });
+  const [playSoundSection2] = useSound(soundSection2, { loop: false });
+  const [playSoundSection3] = useSound(soundSection3);
+  console.log(lockScroll);
+  console.log(currentSection);
 
   const cameraPositions = [
     [0, 10, 9],
@@ -54,8 +64,7 @@ function App() {
         return;
       }
       if (currentSection === 3) {
-        if ( window.scrollY > 0) {
-          
+        if (window.scrollY > 0) {
           return;
         }
       }
@@ -73,12 +82,12 @@ function App() {
       setLockScroll(true);
       setTimeout(() => setLockScroll(false), 1500);
     };
+    console.log('hello');
 
     window.addEventListener("wheel", handleScroll);
     return () => window.removeEventListener("wheel", handleScroll);
   }, [currentSection, isAnimating, lockScroll]);
-  const parallaxIntensity = 0.8; 
-
+  const parallaxIntensity = 0.8;
 
   return (
     <>
@@ -95,7 +104,7 @@ function App() {
             ]}
             currentSection={currentSection}
             isAnimating={isAnimating}
-          setIsAnimating={setIsAnimating}
+            setIsAnimating={setIsAnimating}
           />
           <ambientLight />
           <Environment />
