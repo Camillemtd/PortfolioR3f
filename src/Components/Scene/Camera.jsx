@@ -6,7 +6,7 @@ import { PerspectiveCamera } from "@react-three/drei";
 const Camera = ({ position, currentSection, isAnimating, setIsAnimating  }) => {
   const cameraRef = useRef(null);
   const targetPosition = useMemo(() => new THREE.Vector3(...position), [position]);
-  const lerpSpeed = 0.03;
+  const lerpSpeed = 0.06;
 
   const lookAtPoints = [
       new THREE.Vector3(0, 9, 0),

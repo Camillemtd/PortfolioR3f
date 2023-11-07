@@ -39,6 +39,21 @@ const threejsProject = [
         lienGit: 'https://github.com/Camillemtd/arewefastyet',
         link:'https://benchmark.vitess.io/'
 	},
+	{
+		title:'OlliePollie&Co',
+        description:"Dog Cafe Website",
+		image: '/projects/ollie.png',
+        date: "september 2023",
+		techno: "React/Nodejs/Typescript",
+        lienGit: 'https://github.com/Camillemtd/Ollie-Pollie',
+	},
+	{
+		title:'AI Image Generator',
+        description:"Personal project where I used the DALL-E API.",
+		image: '/projects/dall-e.png',
+        date: "fevrier 2023",
+		techno: "Javascript",
+	},
 ]
 
 export default threejsProject
