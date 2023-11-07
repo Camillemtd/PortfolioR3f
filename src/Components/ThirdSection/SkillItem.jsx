@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SkillItem = ({ title, pourcentage, icone }) => (
-  <div className="flex flex-col mt-5 xl:w-96 w-full gap-5 border p-5 bg-black opacity-70 border-orange-200 ring-inset scale-up-ver-bottomSkill mb-10 xl:mb-0">
+  <div className="flex flex-col mt-5 xl:w-96 w-full gap-5 border p-5 bg-black opacity-70 border-orange-200 ring-inset fade-in-bottom mb-10 xl:mb-0">
     <div className="flex items-center gap-10">
       {icone}
       <span className="text-2xl mr-2 font-thin">{title}</span>

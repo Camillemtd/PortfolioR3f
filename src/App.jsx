@@ -10,6 +10,7 @@ import useSound from "use-sound";
 import soundSection1 from "/sounds/section1.mp3"; // Chemin vers vos fichiers audio
 import soundSection2 from "/sounds/section2.mp3";
 import soundSection3 from "/sounds/section3.mp3";
+import defaultsound from "/sounds/default.wav";
 
 import Model from "./Components/Scene/Model";
 import FirstSection from "./Components/About/FirstSection";
@@ -17,11 +18,12 @@ import SecondSection from "./Components/Projects/SecondSection";
 import ThirdSection from "./Components/ThirdSection/ThirdSection";
 import Camera from "./Components/Scene/Camera";
 import CarouselProjetc from "./Components/Projects/CarouselProjetc";
-import threejsProject from "./data/Projects";
-import image from "./data/image";
+import threejsProject from "./data/Projects";;
 import Header from "./Components/Header";
 import Environment from "./Components/Scene/Environment";
 import Intro from "./Components/About/Intro";
+import SoundCheck from "./Components/SoundCheck";
+import { Sparkles } from "@react-three/drei";
 
 
 function App() {
@@ -32,12 +34,12 @@ function App() {
   const [sound, setSound] = useState(true);
   const [showCarousel, setShowCarousel] = useState(window.innerWidth >= 1280); // State to determine whether to show the carousel
 
-  const [playSoundSection1] = useSound(soundSection1, { loop: false });
-  const [playSoundSection2] = useSound(soundSection2, { loop: false });
-  const [playSoundSection3] = useSound(soundSection3);
+  const [playSoundSection1 ] = useSound(soundSection1, { volume: 0.4, loop: false });
+  const [playSoundSection2] = useSound(soundSection2, { volume: 0.4, loop: false });
+  const [playSoundSection3] = useSound(soundSection3, { volume: 0.4, loop: false });
+  const [playSoundDefault, { stop: stopSoundDefault }] = useSound(defaultsound , {volume: 0.6, loop: true});
 
   const parallaxIntensity = 0.8;
-  console.log(sound);
   const cameraPositions = [
     [0, 10, 9],
     [0, 0, 9],
@@ -51,10 +53,9 @@ function App() {
     [-10, -30, 40],
   ];
 
-  const [positionCamera, setPositionCamera] = useState(cameraPositions); // Position par défaut
+  const [positionCamera, setPositionCamera] = useState(cameraPositions); 
 
   const gererRedimensionnement = () => {
-    // Définir la position de la caméra en fonction de la largeur de la fenêtre
     if (window.innerWidth < 1280) {
       setPositionCamera(cameraPositionsMobile);
     } else {
@@ -63,13 +64,10 @@ function App() {
   };
 
   useEffect(() => {
-    // Définir la position initiale de la caméra
     gererRedimensionnement();
 
-    // Ajouter un écouteur d'événement pour le redimensionnement de la fenêtre
     window.addEventListener('resize', gererRedimensionnement);
 
-    // Nettoyer l'écouteur d'événement
     return () => window.removeEventListener('resize', gererRedimensionnement);
   }, []);
 
@@ -92,7 +90,6 @@ function App() {
     };
   }, []);
 
-  // Gérer le défilement
   useEffect(() => {
     const handleScroll = (e) => {
       if (isAnimating || lockScroll) {
@@ -116,7 +113,7 @@ function App() {
         }
       }
       setLockScroll(true);
-      setTimeout(() => setLockScroll(false), 1000);
+      setTimeout(() => setLockScroll(false), 100);
     };
 
     window.addEventListener("wheel", handleScroll);
@@ -125,7 +122,15 @@ function App() {
 
   useEffect(() => {
     if (sound) {
-      // Cette useEffect se déclenche chaque fois que `currentSection` change.
+      // Le son est activé
+      playSoundDefault();
+    } else {
+      // Le son est désactivé, on l'arrête.
+      stopSoundDefault();
+    }
+  }, [sound, playSoundDefault, stopSoundDefault]); 
+  useEffect(() => {
+    if (sound) {
       switch (currentSection) {
         case 1:
           playSoundSection1();
@@ -136,26 +141,20 @@ function App() {
         case 3:
           playSoundSection3();
           break;
-        // Ajoutez plus de cases si vous avez plus de sections.
-        default:
-          // Un cas par défaut si nécessaire
-          break;
-      }
+
+      } 
     }
-  }, [currentSection, playSoundSection1, playSoundSection2, playSoundSection3]);
+  }, [currentSection, playSoundSection1, playSoundSection2, playSoundSection3, playSoundDefault]);
 
   useEffect(() => {
     function handleResize() {
       setShowCarousel(window.innerWidth >= 1280);
     }
 
-    // Add resize event listener
     window.addEventListener("resize", handleResize);
 
-    // Call the handler right away so state gets updated with initial window size
     handleResize();
 
-    // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -176,6 +175,14 @@ function App() {
           />
           <ambientLight />
           <Environment />
+          <Sparkles 
+          size={10}
+          scale={[100, 130, 0]}
+          position={[10, 4, -120]}
+          speed={0.2}
+          count={500}
+          rotation-y={Math.PI *0.1}
+          />
           <Model ref={modelRef} />
           {showCarousel && (
             <CarouselProjetc
@@ -186,10 +193,10 @@ function App() {
           <directionalLight intensity={10} color={"white"} scale={10} />
         </Canvas>
       </div>
+        <SoundCheck setSound={setSound}/>
+      <Header setCurrentSection={setCurrentSection} setSound={setSound} sound={sound} />
 
-      <Header setCurrentSection={setCurrentSection} setSound={setSound} sound />
-
-      <div className="flex flex-col w-screen relative z-40 ">
+      <div className="flex flex-col w-screen relative z-30 ">
         {currentSection === 0 && <Intro />}
         {currentSection === 1 && <FirstSection />}
         {currentSection === 2 && <SecondSection  showCarousel={showCarousel} data={threejsProject}/>}
