@@ -1,9 +1,13 @@
 import { Html } from "@react-three/drei";
+import CarouselMobile from "./CarouselMobile";
 
-const SecondSection = () => {
+const SecondSection = ({showCarousel, data}) => {
 	return (
-		<section id="project" className="bg-transparent md:mt-20 ">
-			<h2 className="md:text-9xl text-6xl text-white mt-32 md:mt-20 slide-in-bottom">PROJECTS</h2>
+		<section id="project" className="bg-transparent md:mt-20 h-screen xl:h-32">
+			<h2 className="md:text-9xl text-6xl text-white mt-32 md:mt-0 slide-in-bottom flex flex-col">PROJECTS</h2>
+			{!showCarousel && (
+            <CarouselMobile data={data}/>
+          )}
 		</section>
 	);
 };

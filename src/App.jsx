@@ -6,7 +6,6 @@ import React, {
   useWindowSize,
 } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Loader, useProgress } from "@react-three/drei";
 import useSound from "use-sound";
 import soundSection1 from "/sounds/section1.mp3"; // Chemin vers vos fichiers audio
 import soundSection2 from "/sounds/section2.mp3";
@@ -23,6 +22,7 @@ import image from "./data/image";
 import Header from "./Components/Header";
 import Environment from "./Components/Scene/Environment";
 import Intro from "./Components/About/Intro";
+
 
 function App() {
   const [currentSection, setCurrentSection] = useState(0);
@@ -44,6 +44,34 @@ function App() {
     [-4, -3, 9],
     [-10, -30, 40],
   ];
+  const cameraPositionsMobile = [
+    [0, 10, 9],
+    [-2, -1, 15],
+    [-4, -3, 9],
+    [-10, -30, 40],
+  ];
+
+  const [positionCamera, setPositionCamera] = useState(cameraPositions); // Position par défaut
+
+  const gererRedimensionnement = () => {
+    // Définir la position de la caméra en fonction de la largeur de la fenêtre
+    if (window.innerWidth < 1280) {
+      setPositionCamera(cameraPositionsMobile);
+    } else {
+      setPositionCamera(cameraPositions);
+    }
+  };
+
+  useEffect(() => {
+    // Définir la position initiale de la caméra
+    gererRedimensionnement();
+
+    // Ajouter un écouteur d'événement pour le redimensionnement de la fenêtre
+    window.addEventListener('resize', gererRedimensionnement);
+
+    // Nettoyer l'écouteur d'événement
+    return () => window.removeEventListener('resize', gererRedimensionnement);
+  }, []);
 
   const modelRef = useRef(null);
 
@@ -138,11 +166,9 @@ function App() {
           <Camera
             target={modelRef}
             position={[
-              cameraPositions[currentSection][0] +
-                mousePosition.x * parallaxIntensity,
-              cameraPositions[currentSection][1] +
-                mousePosition.y * parallaxIntensity,
-              cameraPositions[currentSection][2],
+              positionCamera[currentSection][0] + mousePosition.x * parallaxIntensity,
+              positionCamera[currentSection][1] + mousePosition.y * parallaxIntensity,
+              positionCamera[currentSection][2],
             ]}
             currentSection={currentSection}
             isAnimating={isAnimating}
@@ -154,7 +180,6 @@ function App() {
           {showCarousel && (
             <CarouselProjetc
               data={threejsProject}
-              images={image}
               currentSection={currentSection}
             />
           )}
@@ -167,7 +192,7 @@ function App() {
       <div className="flex flex-col w-screen relative z-40 ">
         {currentSection === 0 && <Intro />}
         {currentSection === 1 && <FirstSection />}
-        {currentSection === 2 && <SecondSection />}
+        {currentSection === 2 && <SecondSection  showCarousel={showCarousel} data={threejsProject}/>}
         {currentSection === 3 && <ThirdSection />}
       </div>
     </>

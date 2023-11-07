@@ -13,6 +13,13 @@ const Header = ({ setCurrentSection, setSound, sound }) => {
     setOpenMenu(match);
   };
 
+  const menuMobile = () => {
+    if(window.innerWidth < 1280){
+      setOpenMenu(false)
+    }
+    
+  }
+
   useEffect(() => {
     // Appeler la fonction au montage du composant
     checkScreenSize();
@@ -25,29 +32,28 @@ const Header = ({ setCurrentSection, setSound, sound }) => {
 
   return (
     <div className="flex justify-center fixed w-full z-50 nav-container">
-      <input className="checkbox xl:invisible" type="checkbox" name="" id="" onClick={() => setOpenMenu(!openMenu)}/>
-      <div className="hamburger-lines xl:invisible">
-        <span className="line line1"></span>
-        <span className="line line2"></span>
-        <span className="line line3"></span>
+      <div className="hamburger-lines xl:invisible" onClick={() => {setOpenMenu(!openMenu)}}>
+      <span className={`line line1 ${openMenu ? 'rotate45' : ''}`}></span>
+        <span className={`line line2 ${openMenu ? 'scaleY0' : ''}`}></span>
+        <span className={`line line3 ${openMenu ? 'rotate-45' : ''}`}></span>
       </div>
       {openMenu ? (
         <div className="pt-32 xl:pt-0 text-white text-4xl xl:text-2xl flex flex-col xl:flex-row xl:pl-10 xl:pr-10 xl:pt-2 xl:justify-end text-center xl:gap-10 gap-20 xl:p-5 w-full max-w-8xl cursor-pointer xl:visible h-screen xl:h-20 bg-indigo-600  xl:bg-transparent slide-in-right">
-          <a onClick={() => setCurrentSection(1)} className=" font-semibold">
+          <a onClick={() => {setCurrentSection(1), menuMobile()}} className=" font-semibold">
             About
           </a>
-          <a onClick={() => setCurrentSection(2)} className="font-semibold">
+          <a onClick={() => {setCurrentSection(2), menuMobile()}} className="font-semibold">
             Projects
           </a>
           <a
-            onClick={() => setCurrentSection(3)}
+            onClick={() => {setCurrentSection(3), menuMobile()}}
             className=" font-semibold"
             href="#skill"
           >
             Skills
           </a>
           <a
-            onClick={() => setCurrentSection(3)}
+            onClick={() => {setCurrentSection(3), menuMobile()}}
             href="#contact"
             className=" font-semibold"
           >
@@ -57,7 +63,7 @@ const Header = ({ setCurrentSection, setSound, sound }) => {
           <div className="flex gap-20 xl:gap-5 justify-center">
             <a href="https://github.com/Camillemtd">
               <svg
-                className="xl:w-8 w-20 fill-white cursor-pointer"
+                className="xl:w-8 w-16 fill-white cursor-pointer"
                 role="img"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +74,7 @@ const Header = ({ setCurrentSection, setSound, sound }) => {
             </a>
             <a href="https://www.linkedin.com/in/camille-metard-877510174/">
               <svg
-                className="xl:w-8 w-20 fill-white cursor-pointer"
+                className="xl:w-8 w-16 fill-white cursor-pointer"
                 role="img"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -80,12 +86,12 @@ const Header = ({ setCurrentSection, setSound, sound }) => {
             {sound ? (
               <i
                 onClick={() => setSound(false)}
-                className="fa-solid fa-volume-high text-7xl xl:text-3xl"
+                className="fa-solid fa-volume-high text-6xl xl:text-3xl"
               ></i>
             ) : (
               <i
                 onClick={() => setSound(true)}
-                className="fa-solid fa-volume-xmark text-7xl xl:text-3xl"
+                className="fa-solid fa-volume-xmark text-6xl xl:text-3xl"
               ></i>
             )}
           </div>

@@ -90,7 +90,7 @@ const CarouselProjetc = ({ currentSection, data }) => {
 
       // Scale planes progressively using lerpVector
       const planes = groupRef.current.children;
-      const targetForSelected = new THREE.Vector3(1.5, 1.5, 1.5);
+      const targetForSelected = new THREE.Vector3(1.2, 1.2, 1.2);
       const normalScale = new THREE.Vector3(1, 1, 1);
       for (let i = 0; i < planes.length; i++) {
         if (i === selectedPlane) {
